@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>random</title>
+    <style>
+        .box1{width: 600px;font-size: 300px;}
+        @media screen and (max-width:600px) {
+            .box1{width: 300px;flex-direction: column;font-size: 200px;}
+            .spa1{border-bottom: 1px solid black;border-right: none;}
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+<body>
+    <div class="box1" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);text-align: center;cursor: pointer;">◻</div>
+    <div class="bok1"></div>
+    <script>
+        let cont=0
+        const abet=['⚀','⚁','⚂','⚃','⚄','⚅']
+        let roll
+        function dice() {
+            cont++
+            let r1=Math.floor(Math.random()*abet.length)
+            
+            $('.box1').text(abet[r1])
+         
+            if (cont >= 100) {
+                clearInterval(roll); // setInterval 중지
+            }
+        }
+        $('.box1').click(function () {
+            // setInterval(() => {
+                clearInterval(roll);
+                cont=0
+                roll = setInterval(dice, 10);
+            // }, 10);
+            // setTimeout(() => {
+            //     location.reload()
+            // }, 1000);
+        })
+        let loto=[]
+        for (let i = 0; i < 6; i++) {
+            let rd=Math.ceil(Math.random()*45+1)
+            if (loto.indexOf(rd)>0) {
+                let rb=Math.ceil(Math.random()*45+1)
+                loto.push(rb)
+                // console.log(rb,rd,loto.indexOf(rd))
+            }
+            else loto.push(rd)
+        }
+        loto.sort(function(x,y){
+            if(x>y) return 1;
+            if(x<y) return -1;
+            return 0;
+        })
+        // console.log(loto)
+        $('.bok1').text(`the recommended numbers are ${loto}`)
+    </script>
+</body>
+</html>
